@@ -1,0 +1,36 @@
+<ion-header>
+	<ion-toolbar color="brand-color">
+	    <ion-title>
+	        <ion-icon name="arrow-back" (click)="comingBack()"></ion-icon>
+		    {{ "collection" | translate }}</ion-title>
+		<ion-buttons end>
+		<button ion-button icon-only color="royal" (click)="onSave()">
+			<ion-icon name="checkmark"></ion-icon>
+	      </button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+<ion-fab bottom right>
+	<button ion-fab (click)="addInput()"><ion-icon name="add"></ion-icon></button>
+</ion-fab>
+<ion-list>
+	<ion-list-header>{{ "collection" | translate }} {{cupDefinition.name }}</ion-list-header>
+<form [formGroup]="myForm" >
+    <ion-item>
+	<ion-label>Nombre</ion-label>
+	<ion-input type="text" formControlName="name" ></ion-input>
+    </ion-item>
+
+    <div padding formArrayName="formArray">
+        <div *ngFor="let control of myForm.controls['formArray'].controls; let i = index">
+            <dicegroup-item [formPiece]="myForm.controls.formArray.controls[i]"></dicegroup-item>
+            <button ion-button color="danger" (click)="delInput(i)">Delete</button>
+        </div>
+    </div>
+	<div padding>
+    </div>
+</form>
+</ion-list>
+</ion-content>

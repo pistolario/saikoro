@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar color="brand-color">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ "collections" | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="masters">
+<ion-fab bottom right>
+	<button ion-fab (click)="addItem()"><ion-icon name="add" ></ion-icon></button>
+</ion-fab>
+<h3>{{ "collections" | translate }}</h3>
+	<ion-list>
+		<ion-item-sliding *ngFor="let col of lCollections">
+			<ion-item (click)="itemTapped($event, col)"><strong>{{ col.name}}</strong></ion-item>
+			<ion-item-options>
+				<button ion-button icon-only (click)="editItem(col)" color="light">
+					<ion-icon name="paper"></ion-icon>
+				</button>
+				<button ion-button icon-only (click)="deleteItem(col)" color="danger">
+					<ion-icon name="trash"></ion-icon>
+				</button>
+
+			</ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
+</ion-content>

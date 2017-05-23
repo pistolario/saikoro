@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar color="brand-color">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ "table" | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding color="background-basic">
+	<h3 (click)="showCupConfiguration()">{{ "Definition" | translate }}</h3>
+	<div *ngIf="showingCupConfiguracion">
+	<cupconfiguration-item [cupConfiguration]="diceDefinition"></cupconfiguration-item>
+	</div>
+	<h3>{{ "rug" | translate }}</h3>
+	<div *ngFor="let dice of lastThrow">
+		<ul>
+			<li><strong>d{{ dice.dice }}</strong> {{ dice.result}}
+		</ul>
+	</div> <!-- End showing dices -->
+	<button ion-button secondary (click)="launchDices()">{{ "BTN_LAUNCH" | translate }}</button>
+</ion-content>

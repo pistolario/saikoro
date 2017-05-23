@@ -1,0 +1,17 @@
+<div>
+<hr />
+<div *ngFor="let diceDef of cupConfiguration.dices">
+	<div [ngSwitch]="diceDef.diceType" style="display: flex;align-items: center;">
+	<img *ngSwitchCase="'fudge'" src="assets/img/dfudge.png" width="32"> 
+	<img *ngSwitchCase="100" src="assets/img/d100.png" width="32"> 
+	<img *ngSwitchCase="20" src="assets/img/d20.png" width="32"> 
+	<img *ngSwitchCase="12" src="assets/img/d12.png" width="32"> 
+	<img *ngSwitchCase="10" src="assets/img/d10.png" width="32"> 
+	<img *ngSwitchCase="8" src="assets/img/d8.png" width="32"> 
+	<img *ngSwitchCase="6" src="assets/img/d6.png" width="32"> 
+	<img *ngSwitchCase="4" src="assets/img/d4.png" width="32"> 
+	<img *ngSwitchDefault src="assets/img/d6.png" width="32"> {{diceDef.quantity}}
+	</div>
+</div>
+<hr />
+</div>
