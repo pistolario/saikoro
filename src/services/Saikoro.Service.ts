@@ -82,6 +82,27 @@ export class SaikoroService
 		}
 		return ret;
 	}
+	relaunch(toRelaunch: Array<number>): Array<any>
+	{
+		var ret = new Array<any>();
+		console.log("To relaunch");
+		for(let i =0;i<toRelaunch.length;i++)
+		{
+			if(i<this.launchDefinition.length)
+			{
+				let dt = this.launchDefinition[i];
+				var l = [];
+				for(let j=0;j<toRelaunch[i];j++)
+					l.push(this.launchDice(dt.diceType));
+				ret.push({
+					"dice": dt.diceType,
+					"result": l
+					});
+
+			}
+		}
+		return ret;
+	}
 	/*
 	addDice(diceType: string, quantity: number)
 	{

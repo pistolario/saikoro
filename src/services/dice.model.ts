@@ -67,3 +67,16 @@ export class CupDefinition
 		}
 	}
 }
+
+export class DiceState
+{
+	public result: string;
+	public locked: boolean;
+	public toRelaunch: boolean;
+	constructor(result: string)
+	{
+		this.result = result;
+		this.locked=false;
+		this.toRelaunch=false;
+	}
+}

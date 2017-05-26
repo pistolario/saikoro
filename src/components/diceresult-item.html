@@ -1,0 +1,6 @@
+<button>
+	<ion-icon *ngIf="state.locked" name="lock"></ion-icon>
+	<ion-icon *ngIf="state.toRelaunch" name="refresh"></ion-icon>
+	<ion-icon *ngIf="!state.toRelaunch && ! state.locked" name="cube"></ion-icon>
+	{{ state.result }}
+</button>

@@ -15,6 +15,7 @@ import { LocalStorageService} from '../services/LocalStorage.Service';
 import {SQLiteStorageService} from "../services/SQLiteStorage.Service";
 import { StaticStorageService} from "../services/StaticStorage.Service";
 import { CupConfigurationItem} from "../components/cupconfigurationitem.component";
+import { DiceResultItem} from "../components/diceresult.component";
 import { DiceGroupItem} from "../components/dicegroup-item";
 
 @NgModule({
@@ -25,6 +26,7 @@ import { DiceGroupItem} from "../components/dicegroup-item";
     CollectionPage,
     AboutPage,
     CupConfigurationItem,
+    DiceResultItem,
     DiceGroupItem
   ],
   imports: [

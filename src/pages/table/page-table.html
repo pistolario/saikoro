@@ -13,9 +13,10 @@
 	<cupconfiguration-item [cupConfiguration]="diceDefinition"></cupconfiguration-item>
 	</div>
 	<h3>{{ "rug" | translate }}</h3>
-	<div *ngFor="let dice of lastThrow">
+	<div *ngFor="let rowdice of lastThrow">
 		<ul>
-			<li><strong>d{{ dice.dice }}</strong> {{ dice.result}}
+			<li><strong>d{{ rowdice.dice }}</strong> 
+				<diceresultitem *ngFor="let s of rowdice.dices" [state]="s"></diceresultitem>
 		</ul>
 	</div> <!-- End showing dices -->
 	<button ion-button secondary (click)="launchDices()">{{ "BTN_LAUNCH" | translate }}</button>
