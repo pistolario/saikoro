@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import {DiceDefinition, CupDefinition, DiceState} from "../services/dice.model";
+import {DiceState} from "../model/dice.model";
 
 @Component({
   selector: 'diceresultitem',

@@ -5,15 +5,15 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { MyApp } from './app.component';
 import { TablePage } from '../pages/table/table';
+import { JamSessionPage} from '../pages/jamsession/jamsession';
+import { SetupPage} from '../pages/setup/setup.page';
 import { AboutPage } from '../pages/about/about';
 import { CollectionsPage } from '../pages/collections/collections';
 import { CollectionPage } from '../pages/collection/collection.page';
 import { SaikoroService } from '../services/Saikoro.Service';
 import { RandomService} from '../services/Random.Service';
 import { StorageServiceFactory} from '../services/Storage.Service';
-import { LocalStorageService} from '../services/LocalStorage.Service';
-import {SQLiteStorageService} from "../services/SQLiteStorage.Service";
-import { StaticStorageService} from "../services/StaticStorage.Service";
+import { SetupConfiguration} from "../model/setup.model";
 import { CupConfigurationItem} from "../components/cupconfigurationitem.component";
 import { DiceResultItem} from "../components/diceresult.component";
 import { DiceGroupItem} from "../components/dicegroup-item";
@@ -22,6 +22,8 @@ import { DiceGroupItem} from "../components/dicegroup-item";
   declarations: [
     MyApp,
     TablePage,
+    JamSessionPage,
+    SetupPage,
     CollectionsPage,
     CollectionPage,
     AboutPage,
@@ -44,12 +46,15 @@ import { DiceGroupItem} from "../components/dicegroup-item";
   entryComponents: [
     MyApp,
     TablePage,
+    JamSessionPage,
+    SetupPage,
     CollectionPage,
     CollectionsPage,
     AboutPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, SaikoroService, RandomService,
-  	StorageServiceFactory, LocalStorageService, SQLiteStorageService, StaticStorageService]
+  	StorageServiceFactory, SetupConfiguration]
+  	//StorageServiceFactory, LocalStorageService, SQLiteStorageService, StaticStorageService, SetupConfiguration]
 })
 export class AppModule {}
 //

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import {DiceDefinition, CupDefinition} from "../services/dice.model";
+import {CupDefinition} from "../model/dice.model";
 
 @Component({
   selector: 'cupconfiguration-item',

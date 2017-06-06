@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
-import {CupDefinition, DiceDefinition} from "../../services/dice.model";
+import {CupDefinition, DiceDefinition} from "../../model/dice.model";
 import {StorageServiceFactory} from "../../services/Storage.Service";
 import {IStorageService} from "../../services/StorageBack.Service";
 
@@ -29,7 +29,11 @@ export class CollectionPage implements OnInit
 		this.cupDefinition = this.navParams.get("groupdescription");
 		this.callback = this.navParams.get("callback");
 		this.modified=false;
-		this.storageService = storageFactory.getInstance();
+		this.storageService = null;
+	}
+	ionViewDidLoad()
+	{
+		this.storageService = this.storageFactory.getInstance();
 	}
 	ngOnInit(): void
 	{
@@ -79,9 +83,12 @@ export class CollectionPage implements OnInit
 		   console.log(this.myForm.value.formArray[i].itemDiceType);
 		   console.log(this.myForm.value.formArray[i].itemQuantity);
 	   }
-	   let ret=this.storageService.saveCup(this.cupDefinition);
-	   console.log("Save success: "+ret);
-	   this.modified=false;
+	   this.storageService.saveCup(this.cupDefinition).then( () => {
+	   	console.log("Save success");
+		   this.modified=false;
+	   }).catch( (err) => {
+		   console.log("Save error: "+err);
+	   });
    }
 
     onSubmit(): void

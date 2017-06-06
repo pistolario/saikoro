@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
-import {Injectable, Inject} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Injectable } from '@angular/core';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import {RandomService} from "./Random.Service";
-import {DiceDefinition} from "./dice.model";
+import {DiceDefinition} from "../model/dice.model";
 
 
 @Injectable()
@@ -102,6 +100,21 @@ export class SaikoroService
 			}
 		}
 		return ret;
+	}
+	launchSimple(diceType: string, quantity: number): Promise<Array<string>>
+	{
+		if(!(diceType in this.knownDices))
+			return new Promise( (accept, reject) => {
+				reject("Unknown dice");
+			});
+		var ret = new Array<string>();
+		for(let i=0;i<quantity;i++)
+		{
+			ret.push(this.launchDice(diceType));
+		}
+		return new Promise( (accept, reject) => {
+			accept(ret);
+		});
 	}
 	/*
 	addDice(diceType: string, quantity: number)

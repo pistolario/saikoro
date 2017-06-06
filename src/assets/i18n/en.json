@@ -7,5 +7,11 @@
 	"collection": "Collection",
 	"BTN_NEW_COLLECTION": "Add",
 	"About": "About",
-	"aboutText": "Application to help in the hard process of launching dices of different types"
+	"aboutText": "Application to help in the hard process of launching dices of different types",
+	"jamsession": "Jam session",
+	"dices": "Dices",
+	"setup": "Setup",
+	"Randomsource": "Random source",
+	"APIKey": "API key",
+	"dicesound": "Dice sound"
 }

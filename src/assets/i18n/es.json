@@ -7,5 +7,11 @@
 	"collection": "Colección",
 	"BTN_NEW_COLLECTION": "Añadir",
 	"About": "Sobre",
-	"aboutText": "Aplicaicon para ayudar en el duro proceso de lanzar dados de diferentes tipos"
+	"aboutText": "Aplicación para ayudar en el duro proceso de lanzar dados de diferentes tipos",
+	"jamsession": "Improvisación",
+	"dices": "Dados",
+	"setup": "Configuracion",
+	"Randomsource": "Fuente aleatoria",
+	"APIKey": "Llave API",
+	"dicesound": "Sonido dados"
 }

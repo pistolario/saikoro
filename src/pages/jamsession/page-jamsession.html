@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar color="brand-color">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ "jamsession" | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding color="background-basic">
+	<h3>{{ "dices" | translate }}</h3>
+	<!-- <ion-scroll scrollX="true" style="height: 180px; overflow: scroll; white-space: nowrap;"> -->
+	<ion-scroll scrollX="true" style="height: 170px; white-space: nowrap;">
+		<img src="assets/img/d4.png" width="128" (press)="prelaunchDice('4', $event)">
+		<img src="assets/img/d6.png" width="128" (press)="prelaunchDice('6', $event)">
+		<img src="assets/img/dfudge.png" width="128" (press)="prelaunchDice('fudge', $event)">
+		<img src="assets/img/d8.png" width="128" (press)="prelaunchDice('8', $event)">
+		<img src="assets/img/d10.png" width="128" (press)="prelaunchDice('10', $event)">
+		<img src="assets/img/d12.png" width="128" (press)="prelaunchDice('12', $event)">
+		<img src="assets/img/d20.png" width="128" (press)="prelaunchDice('20', $event)">
+		<img src="assets/img/d100.png" width="128" (press)="prelaunchDice('100', $event)">
+	</ion-scroll>
+	<h3>{{ "rug" | translate }}</h3>
+	<ion-list>
+		<ion-item *ngFor="let t of allThrows">
+		</ion-item>
+	</ion-list>
+</ion-content>

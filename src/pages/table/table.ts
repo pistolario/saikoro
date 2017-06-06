@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { SaikoroService} from "../../services/Saikoro.Service";
 
 import { NavController, NavParams } from 'ionic-angular';
-import {DiceDefinition, CupDefinition, DiceState} from "../../services/dice.model";
-import {CupConfigurationItem} from "../../services/cupconfigurationitem.component";
-import {DiceResultItem} from "../../services/diceresult.component";
+import {CupDefinition, DiceState} from "../../model/dice.model";
 
 @Component({
   selector: 'page-table',

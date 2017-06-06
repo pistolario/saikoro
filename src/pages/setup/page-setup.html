@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar color="brand-color">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ "setup" | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding color="background-basic">
+	<ion-list>
+		<ion-item>
+		<ion-label>{{ "Randomsource" | translate}}</ion-label>
+		<ion-select [(ngModel)]="setupConf.randomSource">
+			<ion-option value="default">Local</ion-option>
+			<ion-option value="randomorg">random.org</ion-option>
+		</ion-select>
+		</ion-item>
+		<ion-item>
+		<ion-label>{{ "APIKey" | translate }}</ion-label>
+		<ion-input type="text" [(ngModel)]="setupConf.randomOrgKey"></ion-input>
+		</ion-item>
+		<ion-item>
+		<ion-label>{{ "dicesound" | translate}}</ion-label>
+		<ion-select [(ngModel)]="setupConf.diceSound">
+			<ion-option value="1">Default</ion-option>
+			<ion-option value="2">Other</ion-option>
+		</ion-select>
+		</ion-item>
+	</ion-list>
+</ion-content>

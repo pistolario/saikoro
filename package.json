@@ -1,6 +1,6 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
+  "name": "saikoro",
+  "author": "Marcos Perez",
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
@@ -43,5 +43,5 @@
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [],
-  "description": "saikoro: An Ionic project"
+  "description": "Saikoro: A dice simulator"
 }

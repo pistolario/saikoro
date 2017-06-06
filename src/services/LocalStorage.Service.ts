@@ -1,9 +1,6 @@
-import {Injectable, Inject} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/Rx';
-import 'rxjs/add/operator/map';
 import { IStorageService} from "./StorageBack.Service";
-import {CupDefinition, DiceDefinition} from "./dice.model";
+import {CupDefinition } from "../model/dice.model";
+import {SetupConfiguration} from "../model/setup.model";
 
 export class LocalStorageService implements IStorageService
 {
@@ -13,7 +10,7 @@ export class LocalStorageService implements IStorageService
 		this.loadAllCups();
 	}
 
-	getListCups()
+	getListCups(): Promise<Array<any>>
 	{
 		let ret: Array<any>;
 		ret = [];
@@ -21,18 +18,29 @@ export class LocalStorageService implements IStorageService
 		{
 			ret.push({"name": c.name, "id": c.id});
 		}
-		return ret;
+		return new Promise<Array<any>>((resolve, reject) => {
+			resolve(ret);
+		})
 	}
-	loadCup(idCup: number): CupDefinition
+	loadCup(idCup: number): Promise<CupDefinition>
 	{
+		let res=null;
 		for(let c of this.cups)
 		{
 			if(c.id==idCup)
-				return c;
+			{
+				res=c;
+				break;
+			}
 		}
-		return null;
+		return new Promise<CupDefinition>((resolve, reject) => {
+			if(res!=null)
+				resolve(res);
+			else
+				reject();
+		});
 	}
-	saveCup(cupDefinition: CupDefinition): boolean
+	saveCup(cupDefinition: CupDefinition): Promise<any>
 	{
 		if(cupDefinition.id>=0)
 		{
@@ -43,18 +51,19 @@ export class LocalStorageService implements IStorageService
 					console.log(c);
 					console.log(cupDefinition);
 					c.copy(cupDefinition);
-					this.saveAllCups();
-					return true;
+					return this.saveAllCups();
 				}
 			}
-			return false;
+			return new Promise<void>((accept, reject) => {
+				reject();
+				});
 		}
 		else
 		{
 			return this.newCup(cupDefinition);
 		}
 	}
-	newCup(cupDefinition: CupDefinition): boolean
+	newCup(cupDefinition: CupDefinition): Promise<CupDefinition>
 	{
 		let maxId=0;
 		for(let c of this.cups)
@@ -64,23 +73,34 @@ export class LocalStorageService implements IStorageService
 		}
 		cupDefinition.id=maxId+1;
 		this.cups.push(cupDefinition);
-		this.saveAllCups();
-		return true;
+
+		return this.saveAllCups().then(() => {
+			return new Promise<CupDefinition>( (accept, reject) => {
+			accept( cupDefinition);
+			}
+							 )
+		}
+				       );
 	}
-	deleteCup(idCup: number): boolean
+	deleteCup(idCup: number): Promise<boolean>
 	{
 		for(let i=0;i<this.cups.length;i++)
 		{
 			if(this.cups[i].id==idCup)
 			{
 				this.cups.splice(i, 1);
-				this.saveAllCups();
-				return true;
+				return this.saveAllCups().then( () => {
+					return new Promise<boolean>( (accept, reject )=> {
+					accept(true);
+					})
+				});
 			}
 		}
-		return false;
+		return new Promise<boolean>((accept, reject) => {
+			reject();
+		})
 	}
-	loadAllCups()
+	loadAllCups(): Promise<void>
 	{
 		let storageKey = "cupsDefinition";
 		if(localStorage.getItem(storageKey)!=null)
@@ -100,12 +120,44 @@ export class LocalStorageService implements IStorageService
 			this.cups=[];
 		}
 		console.log("Cups loaded: "+this.cups);
+		return new Promise<void>((accept, reject) => {
+			accept();
+			});
 	}
-	saveAllCups()
+	saveAllCups(): Promise<void>
 	{
 		let storageKey = "cupsDefinition";
 		let serialized = JSON.stringify(this.cups);
 		console.log("To store: "+serialized);
 		localStorage.setItem(storageKey, serialized);
+		return new Promise<void>((resolve, reject) => {
+			resolve();
+		});
+	}
+	storeSetup(setup: SetupConfiguration): Promise<void>
+	{
+		let storageKey = "setupConfiguration";
+		let serialized = JSON.stringify(setup);
+		console.log("To store: "+serialized);
+		localStorage.setItem(storageKey, serialized);
+		return new Promise<void>((accept, reject) => {
+			accept();
+		});
+	}
+	retrieveSetup(setup: SetupConfiguration): Promise<void>
+	{
+		let storageKey = "setupConfiguration";
+		if(localStorage.getItem(storageKey)!=null)
+		{
+			let sContent=localStorage.getItem(storageKey);
+			console.log("Retrieved: "+sContent);
+			let cRaw = JSON.parse(sContent);
+			setup.randomSource=cRaw["randomSource"];
+			setup.randomOrgKey=cRaw["randomOrgKey"];
+			setup.diceSound=cRaw["diceSound"];
+		}
+		return new Promise<SetupConfiguration>(( accept, reject) => {
+			accept();
+		});
 	}
 }

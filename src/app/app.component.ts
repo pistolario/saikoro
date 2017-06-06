@@ -1,12 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-import {Injectable, Inject} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import { TablePage } from '../pages/table/table';
+import { JamSessionPage} from '../pages/jamsession/jamsession';
+import { SetupPage} from '../pages/setup/setup.page';
 import { AboutPage} from '../pages/about/about';
 import { CollectionsPage } from '../pages/collections/collections';
-import { CollectionPage } from '../pages/collection/collection.page';
 import { SaikoroService} from '../services/Saikoro.Service';
 
 
@@ -28,7 +28,9 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
+      { title: 'Jam session', component: JamSessionPage},
       { title: 'Collections', component: CollectionsPage },
+      { title: 'Setup', component: SetupPage},
       { title: 'About', component: AboutPage}
     ];
 
