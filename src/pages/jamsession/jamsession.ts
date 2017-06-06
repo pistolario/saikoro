@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular'
 import {NativeAudio} from 'ionic-native';
 import { SaikoroService} from "../../services/Saikoro.Service";
-import {CupDefinition} from "../../model/dice.model";
+import {CupDefinition, DiceState} from "../../model/dice.model";
 import {SetupConfiguration} from "../../model/setup.model";
 
 @Component({
@@ -14,7 +14,7 @@ export class JamSessionPage
 {
 	idDiceGroup: string;
 	diceDefinition: CupDefinition;
-	lastThrow: Array<any>;
+	lastThrow: any;
 	allThrows: Array<any>;
 	audioId: string;
 
@@ -91,8 +91,17 @@ export class JamSessionPage
 		if(this.audioId!=null)
 			NativeAudio.play(this.audioId);
 		this.saikoro.launchSimple(dice, q).then( (result) => {
-			this.lastThrow = result;
-			this.allThrows.push(result);
+			let lt={ 
+				"dice": dice,
+				"dices": []
+			}
+			for(let rlt2 of result)
+			{
+				let d=new DiceState(rlt2);
+				lt.dices.push(d);
+			}
+			this.lastThrow = lt;
+			this.allThrows.push(lt);
 		}, (err) => {
 			console.log("Error calling saikoro: "+err);
 		});

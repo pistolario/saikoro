@@ -23,6 +23,8 @@
 	<h3>{{ "rug" | translate }}</h3>
 	<ion-list>
 		<ion-item *ngFor="let t of allThrows">
+			<li><strong>d{{ t.dice }}</strong> 
+				<diceresultitem *ngFor="let s of t.dices" [state]="s"></diceresultitem>
 		</ion-item>
 	</ion-list>
 </ion-content>
