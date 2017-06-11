@@ -1,20 +1,19 @@
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
-import { SQLite} from 'ionic-native';
+import { SQLite, SQLiteObject} from '@ionic-native/sqlite';
 import { IStorageService} from "./StorageBack.Service";
 import {CupDefinition} from "../model/dice.model";
 import {SetupConfiguration} from "../model/setup.model";
 
 export class SQLiteStorageService implements IStorageService
 {
-	private db:SQLite;
-	private databaseName: String = "saikoro.db";
+	private databaseName: string = "saikoro.db";
 	cups: Array<CupDefinition>;
-	sc: SetupConfiguration;
-	constructor(sc: any)
+	private db: SQLiteObject;
+	constructor(public sc: SetupConfiguration, public sqlite: SQLite)
 	{
 		this.cups=[];
-		this.sc=sc;
+		this.db=null;
 	}
 	getListCups(): Promise<Array<any>>
 	{
@@ -72,7 +71,15 @@ export class SQLiteStorageService implements IStorageService
 			}
 			else
 			{
-				return this.newCup(cupDefinition);
+				return this.newCup(cupDefinition).then( (cd) => {
+					return new Promise<void>( (accept, reject) => {
+						accept();
+					});
+				}, (err) => {
+					return new Promise<void>((accept, reject ) => {
+						reject(err);
+					});
+				});
 			}
 		});
 	}
@@ -120,7 +127,7 @@ export class SQLiteStorageService implements IStorageService
 	{
 		return this.prepareDatabase().then( () => {
 				return this.db.executeSql("SELECT * FROM CUP_DEFINITION", [])
-			}).then((data) => {
+			}).then((data: any) => {
 				this.cups=[];
 				console.log("Loading cup definitions");
 				for(let i=0;i<data.rows.length;i++)
@@ -164,14 +171,14 @@ export class SQLiteStorageService implements IStorageService
 			return new Promise<void>((accept, reject) => {
 				accept();
 			});
-		this.db = new SQLite();
 		let comandos: Array<string>= [];
 		comandos.push('create table if not exists CUP_DEFINITION (content VARCHAR(4096))');
 		comandos.push('create table if not exists PARAMETERS (name VARCHAR(64), value VARCHAR(1024))');
-		return this.db.openDatabase({
+		return this.sqlite.create({
 			name: this.databaseName,
 			location: 'default' // the location field is required
-			}).then(() => {
+			}).then((db: SQLiteObject) => {
+				this.db = db;
 				this.db.sqlBatch(comandos);
 			}).catch( (err) => {
 				console.log("Unable to execute command: "+err);
@@ -218,7 +225,7 @@ export class SQLiteStorageService implements IStorageService
 	{
 		return this.prepareDatabase().then(() => {
 			return this.db.executeSql("SELECT name, value FROM PARAMETERS WHERE name in ('randomSource', 'randomOrgKey', 'diceSound')", [])
-		}).then((data) => {
+		}).then((data: any) => {
 			for(let i=0;i<data.rows.length;i++)
 			{
 				let name=data.rows.item(i).name;

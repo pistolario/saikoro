@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import {SplashScreen} from "@ionic-native/splash-screen";
+import {StatusBar} from "@ionic-native/status-bar";
 import {Injectable} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import { JamSessionPage} from '../pages/jamsession/jamsession';
@@ -21,10 +22,10 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public translate: TranslateService,
-	      private saikoroService: SaikoroService)
+  constructor(public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+	  public translate: TranslateService, private saikoroService: SaikoroService)
   {
-    this.initializeApp();
+    this.initializeApp(statusBar, splashScreen);
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -36,15 +37,15 @@ export class MyApp {
 
   }
 
-  initializeApp()
+  initializeApp(statusBar: StatusBar, splashScreen: SplashScreen)
   {
 	  this.translate.setDefaultLang("en");
 	  this.translate.use('en');
 	this.platform.ready().then(() => {
 		// Okay, so the platform is ready and our plugins are available.
 		// Here you can do any higher level native things you might need.
-		StatusBar.styleDefault();
-		Splashscreen.hide();
+		statusBar.styleDefault(); // use provided instances instead, dependency injection rules!
+		splashScreen.hide();
     	});
   }
 

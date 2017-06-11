@@ -156,7 +156,7 @@ export class LocalStorageService implements IStorageService
 			setup.randomOrgKey=cRaw["randomOrgKey"];
 			setup.diceSound=cRaw["diceSound"];
 		}
-		return new Promise<SetupConfiguration>(( accept, reject) => {
+		return new Promise<void>(( accept, reject) => {
 			accept();
 		});
 	}
