@@ -1,9 +1,10 @@
+import { IonicPage } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { SaikoroService} from "../../services/Saikoro.Service";
-
 import { NavController, NavParams } from 'ionic-angular';
 import {CupDefinition, DiceState} from "../../model/dice.model";
 
+@IonicPage()
 @Component({
   selector: 'page-table',
   templateUrl: 'page-table.html'

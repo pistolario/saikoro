@@ -1,9 +1,11 @@
+import { IonicPage } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { SetupConfiguration} from "../../model/setup.model";
 import {StorageServiceFactory} from "../../services/Storage.Service";
 import {IStorageService} from "../../services/StorageBack.Service";
 
+@IonicPage()
 @Component({
   selector: 'setuppage',
   templateUrl: 'page-setup.html'

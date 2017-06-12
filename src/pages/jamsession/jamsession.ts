@@ -1,3 +1,4 @@
+import { IonicPage } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular'
@@ -6,6 +7,7 @@ import { SaikoroService} from "../../services/Saikoro.Service";
 import {CupDefinition, DiceState} from "../../model/dice.model";
 import {SetupConfiguration} from "../../model/setup.model";
 
+@IonicPage()
 @Component({
   selector: 'jamsession',
   templateUrl: 'page-jamsession.html'

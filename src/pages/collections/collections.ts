@@ -1,11 +1,11 @@
+import { IonicPage } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import {StorageServiceFactory} from "../../services/Storage.Service";
 import {IStorageService} from "../../services/StorageBack.Service";
-import {TablePage} from "../table/table"
-import {CollectionPage} from "../collection/collection.page"
 import { CupDefinition, DiceDefinition} from "../../model/dice.model";
 
+@IonicPage()
 @Component({
   selector: 'page-collections',
   templateUrl: 'page-collections.html'
@@ -40,7 +40,7 @@ export class CollectionsPage
 		console.log("Item selected");
 		this.storageService.loadCup(col.id).then( (setupCup) => {
 			console.log("We've got dice definition");
-			this.nav.push(TablePage, {
+			this.nav.push("TablePage", {
 				iddicegroup: col.id,
 				groupdescription: setupCup
 			});
@@ -75,7 +75,7 @@ export class CollectionsPage
 				});
 			     });
 			}
-			this.nav.push(CollectionPage, {
+			this.nav.push("CollectionPage", {
 				iddicegroup: col.id,
 				groupdescription: setupCup,
 				callback: myCallbackFunction

@@ -21,10 +21,12 @@
 		<img src="assets/img/d100.png" width="128" (press)="prelaunchDice('100', $event)">
 	</ion-scroll>
 	<h3>{{ "rug" | translate }}</h3>
+	<ion-scroll scrollY="true" style="height: calc(100vh - 350px);white-space: nowrap;">
 	<ion-list>
 		<ion-item *ngFor="let t of allThrows">
 			<li><strong>d{{ t.dice }}</strong> 
 				<diceresultitem *ngFor="let s of t.dices" [state]="s"></diceresultitem>
 		</ion-item>
 	</ion-list>
+	</ion-scroll>
 </ion-content>

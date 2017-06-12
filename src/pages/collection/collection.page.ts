@@ -1,3 +1,4 @@
+import { IonicPage } from 'ionic-angular';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
@@ -5,6 +6,7 @@ import {CupDefinition, DiceDefinition} from "../../model/dice.model";
 import {StorageServiceFactory} from "../../services/Storage.Service";
 import {IStorageService} from "../../services/StorageBack.Service";
 
+@IonicPage()
 @Component({
   selector: 'page-collection',
   templateUrl: 'page-collection-edit.html'
